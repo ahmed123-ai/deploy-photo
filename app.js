@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var mongoose = require('mongoose');
+require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,15 +13,14 @@ var galleryRouter = require('./routes/gallery');
 var app = express();
 
 
-
-mongoose.connect("mongodb+srv://ahmewalha123:DHzDfjVTJodY7PRM@cluster0.sxmhrp2.mongodb.net", {
+ 
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() =>  console.log('connection successful'))
   .catch((err) => console.error(err));
 
-
-  
+ 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
